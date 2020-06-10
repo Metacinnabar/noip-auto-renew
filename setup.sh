@@ -74,7 +74,7 @@ function deploy() {
     noip
     if [ "${notify^^}" = "Y" ]
     then
-      notificationSetup(notification)
+      notificationSetup "$notification" # This calls notification setup with the selected notification type.
     fi
     $SUDO sed -i '/noip-renew/d' /etc/crontab
     echo "$CRONJOB" | $SUDO tee -a /etc/crontab
@@ -119,25 +119,24 @@ function notificationInstall() {
     do
         case $opt in
             "Pushover Notifications")
-                notification = "Pushover"
-                echo "Pushover requirements installed."
+                notification="Pushover"
+                echo "Pushover requirements installed..."
                 break
                 ;;
             "Slack Notifications")
-                notification = "Slack"
+                notification="Slack"
                 $SUDO $PYTHON -m pip install slackclient
-                echo "Slack requirements installed."
+                echo "Slack requirements installed..."
                 break
                 ;;
             "Telegram Notifications")
-                notification = "Telegram"
+                notification="Telegram"
                 $SUDO $PYTHON -m pip install telegram-send
-                $SUDO telegram-send --configure
-                echo "Telegram requirements installed."
+                echo "Telegram requirements installed..."
                 break
                 ;;
             "None")
-                notify = "N"
+                notify="N"
                 break
                 ;;
             *) echo "invalid option $REPLY";;
@@ -145,8 +144,11 @@ function notificationInstall() {
     done
 }
 
-function notificationSetup(notification) {
-    echo $notification
+
+function notificationSetup() {
+    $SUDO sed -i 's/NOTIFICATION=".*"/NOTIFICATION="'$1'"/1' $INSTEXE
+    echo $1
+    # SELECT CASE TO CALL BELOW FUNCTIONS:
 }
 
 
@@ -160,13 +162,24 @@ function slack() {
 }
 
 function pushover() {
-    pushover = true
-    echo "Picked Pushover"
+    echo "Enter your Pushover Token..."
+    read -p 'Token: ' tokenvar
+
+    tokenvar=`echo -n $tokenvar | base64`
+
+    $SUDO sed -i 's/PUSHOVER_TOKEN=".*"/PUSHOVER_TOKEN="'$tokenvar'"/1' $INSTEXE
+
+    echo "Enter your Pushover User Key..."
+    read -p 'User: ' uservar
+
+    tokenvar=`echo -n $uservar | base64`
+
+    $SUDO sed -i 's/PUSHOVER_USER_KEY=".*"/PUSHOVER_USER_KEY="'$uservar'"/1' $INSTEXE
 }
 
 function telegram() {
-    telegram = true
-    echo "Picked Telegram"
+    echo "Please configure Telegram:"
+    $SUDO telegram-send --configure
 }
 
 
