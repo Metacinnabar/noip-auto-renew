@@ -34,6 +34,11 @@ class Logger:
         if self.level > 0:
             print(f"[{self.time_string_formatter}] - {msg}")
 
+class Notify:
+    def __init__(self, notification_type):
+        self.notification_type = notification_type
+        print(f"Notification Type: {notification_type}")
+
 
 class Robot:
 
@@ -41,12 +46,13 @@ class Robot:
     LOGIN_URL = "https://www.noip.com/login"
     HOST_URL = "https://my.noip.com/#!/dynamic-dns"
 
-    def __init__(self, username, password, debug):
+    def __init__(self, username, password, notification_type, debug):
         self.debug = debug
         self.username = username
         self.password = password
         self.browser = self.init_browser()
         self.logger = Logger(debug)
+        self.notification = Notify(notification_type)
 
     @staticmethod
     def init_browser():
@@ -177,23 +183,24 @@ class Robot:
 
 
 def main(argv=None):
-    noip_username, noip_password, debug,  = get_args_values(argv)
-    return (Robot(noip_username, noip_password, debug)).run()
+    noip_username, noip_password, notification_type, debug,  = get_args_values(argv)
+    return (Robot(noip_username, noip_password, notification_type, debug)).run()
 
 
 def get_args_values(argv):
     if argv is None:
         argv = sys.argv
-    if len(argv) < 3:
-        print(f"Usage: {argv[0]} <noip_username> <noip_password> [<debug-level>] ")
+    if len(argv) < 4:
+        print(f"Usage: {argv[0]} <noip_username> <noip_password> <notification_type> [<debug-level>]")
         sys.exit(1)
 
     noip_username = argv[1]
     noip_password = argv[2]
+    notification_type = argv[3]
     debug = 1
-    if len(argv) > 3:
-        debug = int(argv[3])
-    return noip_username, noip_password, debug
+    if len(argv) > 4:
+        debug = int(argv[4])
+    return noip_username, noip_password, notification_type, debug
 
 
 if __name__ == "__main__":

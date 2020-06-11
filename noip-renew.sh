@@ -33,11 +33,13 @@ if [ ! -z "$NOTIFICATION" ]; then
         *) echo "An error occured.";;
     esac
     NOTIFICATION="${NOTIFICATION}${NPARMS}"
+else
+    NOTIFICATION="NONE"
 fi
 
 if [ -z "$LOGDIR" ]; then
-    $PROGDIR/noip-renew.py "$USERNAME" "$PASSWORD" 2 "$NOTIFICATION"
+    $PROGDIR/noip-renew.py "$USERNAME" "$PASSWORD" "$NOTIFICATION" 2
 else
     cd $LOGDIR
-    $PROGDIR/noip-renew.py "$USERNAME" "$PASSWORD" 0 "$NOTIFICATION" >> $USERNAME.log
+    $PROGDIR/noip-renew.py "$USERNAME" "$PASSWORD" "$NOTIFICATION" 0 >> $USERNAME.log
 fi
