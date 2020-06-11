@@ -5,9 +5,9 @@ This script auto clicks web pages to renew the hosts,
 using Python/Selenium with Chrome headless mode.
 
 - Platform: Debian/Ubuntu/Raspbian Linux, no GUI needed (tested on Debian 9.x/10.x); python 3.6+
-- Ver: 1.1
+- Ver: 1.2
 - Ref: [Technical explanation for the code (Chinese)](http://www.jianshu.com/p/3c8196175147)
-- Updated: 05/18/2020
+- Updated: 06/11/2020
 - Created: 11/04/2017
 - Author: loblab
 - Contributor: [IDemixI](https://www.github.com/IDemixI)
@@ -28,6 +28,8 @@ Check confirmed records from multiple log files:
 grep -h Confirmed *.log | grep -v ": 0" | sort
 ```
 
+To check script version, use command: ``noip-renew-user --version``
+
 ## Remarks
 
 The script is not designed to renew/update the dynamic DNS records, though the latest version does have this ability if requested.
@@ -35,7 +37,16 @@ Check [noip.com documentation](https://www.noip.com/integrate) for that purpose.
 Most wireless routers support noip.com. For more information, check [here](https://www.noip.com/support/knowledgebase/what-devices-support-no-ips-dynamic-dns-update-service/).
 You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip.com DNS records.
 
+
+## Notification Setup
+
+Pushover:
+Slack:
+Telegram:
+
+
 ## History
+- 1.2 (06/11/2020): Added Notification support for Pushover, Slack & Telegram. 
 - 1.1 (06/05/2020): Fixed error when attempting to update an expired host.
 - 1.0 (05/18/2020): Minor fixes to an xpath & a try catch pass to avoid an exception. Also fixed versioning.
 - 1.0 (04/16/2020): Catches "Would you like to upgrade?" page & stops script accordingly. Manual intervention still required.

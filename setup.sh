@@ -147,8 +147,12 @@ function notificationInstall() {
 
 function notificationSetup() {
     $SUDO sed -i 's/NOTIFICATION=".*"/NOTIFICATION="'$1'"/1' $INSTEXE
-    echo $1
-    # SELECT CASE TO CALL BELOW FUNCTIONS:
+
+    case $1 in
+        "Pushover") echo "PUSHOVER";;
+        "Slack") echo "SLACK";;
+        "Telegram" echo "TELEGRAM";;
+    esac
 }
 
 
