@@ -188,7 +188,7 @@ class Robot:
         today = date.today() + timedelta(days=nr)
         day = str(today.day)
         month = str(today.month)
-        self.notification.send(f"Next host update in {str(nr)} days", "results.png")
+        self.notification.send(f"No-IP Renew ran successfully. The next host update is in {str(nr)} days", "results.png")
         subprocess.call(['/usr/local/bin/noip-renew-skd.sh', day, month, "True"])
         return True
 

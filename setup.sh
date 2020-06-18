@@ -187,10 +187,10 @@ function slack() {
 
     tokenvar=`echo -n $tokenvar | base64`
 
-    $SUDO sed -i 's/SLACKTOKEN=".*"/SLACKTOKEN="'$tokenvar'"/1' $INSTEXE
+    $SUDO sed -i 's/SLACK_TOKEN=".*"/SLACK_TOKEN="'$tokenvar'"/1' $INSTEXE
 
     echo "Enter the channel you wish to receive notifications on..."
-    read -p 'Channel:' channel
+    read -p 'Channel: ' channel
 
     $SUDO sed -i 's/CHANNEL=".*"/CHANNEL="'$channel'"/1' $INSTEXE
 }
