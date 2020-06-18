@@ -30,7 +30,8 @@ except ImportError:
     pass
 
 try:
-    import slack
+    from slack import WebClient
+    from slack.errors import SlackApiError
 except ImportError:
     pass
 
@@ -57,6 +58,7 @@ class Notify:
     APP_TOKEN = ""
     USER_KEY = ""
     SLACK_TOKEN = ""
+    CHANNEL = ""
 
     def __init__(self, notification_type):
         self.notification_type = notification_type
@@ -71,6 +73,7 @@ class Notify:
 
     def setupSlack(self):
         self.SLACK_TOKEN = base64.b64decode(self.notification_type.split('|')[1]).decode('utf-8')
+        self.CHANNEL = self.notification_type.split('|')[2]
 
     def pushover(self, msg, img):
         r = requests.post("https://api.pushover.net/1/messages.json", data = {
@@ -84,7 +87,19 @@ class Notify:
         del r
 
     def slack(self, msg, img):
-        print("SEND SLACK MESSAGE HERE")
+        client = WebClient(token=self.SLACK_TOKEN)
+        try:
+            client.chat_postMessage(
+                channel=self.CHANNEL,
+                text=msg
+            )
+            client.files_upload(
+                channels=self.CHANNEL,
+                file=img,
+                title=img,
+            )
+        except SlackApiError as e:
+            assert e.response["error"]
 
     def telegram(self, msg, img):
         print("SEND TELEGRAM MESSAGE HERE")

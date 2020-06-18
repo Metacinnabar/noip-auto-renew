@@ -24,12 +24,13 @@ PUSHOVER_USER_KEY=""
 
 # Slack
 SLACK_TOKEN=""
+CHANNEL=""
 
 if [ ! -z "$NOTIFICATION" ]; then
     NPARMS=""
     case $NOTIFICATION in
         "Pushover") NPARMS="|${PUSHOVER_TOKEN}|${PUSHOVER_USER_KEY}";;
-        "Slack") NPARMS="|${SLACK_TOKEN}";;
+        "Slack") NPARMS="|${SLACK_TOKEN}|${CHANNEL}";;
         "Telegram") NPARMS="";;
         *) echo "An error occured.";;
     esac
