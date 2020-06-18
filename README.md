@@ -17,8 +17,10 @@ using Python/Selenium with Chrome headless mode.
 ## Usage
 
 1. Clone this repository to the device you will be running it from. (`git clone https://github.com/loblab/noip-renew.git`)
-2. Run setup.sh and set your noip.com account information,
-3. Run noip-renew.sh, check results.png (if succeeded) or error.png (if failed)
+2. Run setup.sh and set your noip.com account information.
+3. Run `noip-renew-username`, check results.png (if succeeded) or error.png (if failed)
+
+For information on how to set up Notifications, please read the Notifications section.
 
 For docker users, check Dockerfile, docker-compose.yml, crontab-docker-host.
 
@@ -28,7 +30,7 @@ Check confirmed records from multiple log files:
 grep -h Confirmed *.log | grep -v ": 0" | sort
 ```
 
-To check script version, use command: ``noip-renew-user --version``
+To check script version, use command: ``noip-renew-username --version``
 
 ## Remarks
 
@@ -40,9 +42,19 @@ You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip
 
 ## Notification Setup
 
-Pushover:
-Slack:
-Telegram:
+# Pushover:
+
+1. Create an account over at https://pushover.net/signup.
+2. After signing up and confirming your account, you should see a User Key. This is required during setup.
+3. Create a [new application/API Token](https://pushover.net/apps/build). I've named mine "No-IP Host Monitor"
+4. Once you've created your new App, you will see an API Token/Key. This is also required during setup.
+5. Make sure you have the Pushover Application installed on your [device of choice](https://pushover.net/clients).
+6. When running setup.sh, insert your pushover details when asked. This should now work.
+
+# Slack:
+
+
+# Telegram:
 
 
 ## History
