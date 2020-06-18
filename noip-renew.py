@@ -24,7 +24,24 @@ import re
 import base64
 import subprocess
 
+try:
+    import requests
+except ImportError:
+    pass
+
+try:
+    import slack
+except ImportError:
+    pass
+
+try:
+    import telegram_send
+except ImportError:
+    pass
+
+
 class Logger:
+
     def __init__(self, level):
         self.level = 0 if level is None else level
 
@@ -34,10 +51,55 @@ class Logger:
         if self.level > 0:
             print(f"[{self.time_string_formatter}] - {msg}")
 
+
 class Notify:
+
+    APP_TOKEN = ""
+    USER_KEY = ""
+    SLACK_TOKEN = ""
+
     def __init__(self, notification_type):
         self.notification_type = notification_type
-        print(f"Notification Type: {notification_type}")
+        self.setup(self.notification_type)
+
+    def setup(self, notification_type):
+        return { "Pushover": self.setupPushover, "Slack": self.setupSlack }.get(self.notification_type.split('|')[0], lambda : 'Invalid')()
+
+    def setupPushover(self):
+        self.APP_TOKEN = base64.b64decode(self.notification_type.split('|')[1]).decode('utf-8')
+        self.USER_KEY = base64.b64decode(self.notification_type.split('|')[2]).decode('utf-8')
+
+    def setupSlack(self):
+        self.SLACK_TOKEN = base64.b64decode(self.notification_type.split('|')[1]).decode('utf-8')
+
+    def pushover(self, msg, img):
+        r = requests.post("https://api.pushover.net/1/messages.json", data = {
+          "token": self.APP_TOKEN,
+          "user": self.USER_KEY,
+          "message": msg
+        },
+        files = {
+          "attachment": ("image.png", open(img, "rb"), "image/png")
+        })
+        del r
+
+    def slack(self, msg, img):
+        print("SEND SLACK MESSAGE HERE")
+
+    def telegram(self, msg, img):
+        print("SEND TELEGRAM MESSAGE HERE")
+
+    def send(self, message, image):
+        if self.notification_type.split('|')[0] == "Pushover":
+            self.pushover(message, image)
+        elif self.notification_type.split('|')[0] == "Slack":
+            self.slack(message, image)
+        elif self.notification_type.split('|')[0] == "Telegram":
+            self.telegram(message, image)
+        elif self.notification_type.split('|')[0] == "None":
+            return
+        else:
+            raise Exception("Something went wrong with notifications. Try to reinstall the script.")
 
 
 class Robot:
@@ -105,12 +167,13 @@ class Robot:
                 self.update_host(host_button, host_name)
                 count += 1
             iteration += 1
-        self.browser.save_screenshot("results.png")
+        self.browser.save_screenshot("results.png") # Image of host page listing all active hosts.
         self.logger.log(f"Confirmed hosts: {count}", 2)
         nr = min(next_renewal) - 6
         today = date.today() + timedelta(days=nr)
         day = str(today.day)
         month = str(today.month)
+        self.notification.send(f"Next host update in {str(nr)} days", "results.png")
         subprocess.call(['/usr/local/bin/noip-renew-skd.sh', day, month, "True"])
         return True
 
@@ -121,6 +184,7 @@ class Robot:
         except TimeoutException as e:
             self.browser.save_screenshot("timeout.png")
             self.logger.log(f"Timeout: {str(e)}")
+            self.notification.send(f"Timeout: {str(e)}", "timeout.png")
 
     def update_host(self, host_button, host_name):
         self.logger.log(f"Updating {host_name}")
@@ -137,6 +201,7 @@ class Robot:
             raise Exception("Manual intervention required. Upgrade text detected.")
 
         self.browser.save_screenshot(f"{host_name}_success.png")
+        self.notification.send(f"{host_name} updated successfully", f"{host_name}_success.png")
 
     @staticmethod
     def get_host_expiration_days(host, iteration):
@@ -175,6 +240,7 @@ class Robot:
         except Exception as e:
             self.logger.log(str(e))
             self.browser.save_screenshot("exception.png")
+            self.notification.send(f"An error has occured: {str(e)}", "exception.png")
             subprocess.call(['/usr/local/bin/noip-renew-skd.sh', "0", "0", "False"])
             rc = 2
         finally:

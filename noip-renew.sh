@@ -30,16 +30,17 @@ if [ ! -z "$NOTIFICATION" ]; then
     case $NOTIFICATION in
         "Pushover") NPARMS="|${PUSHOVER_TOKEN}|${PUSHOVER_USER_KEY}";;
         "Slack") NPARMS="|${SLACK_TOKEN}";;
+        "Telegram") NPARMS="";;
         *) echo "An error occured.";;
     esac
-    NOTIFICATION="${NOTIFICATION}${NPARMS}"
+    NOTIFY="${NOTIFICATION}${NPARMS}"
 else
-    NOTIFICATION="NONE"
+    NOTIFY="None"
 fi
 
 if [ -z "$LOGDIR" ]; then
-    $PROGDIR/noip-renew.py "$USERNAME" "$PASSWORD" "$NOTIFICATION" 2
+    $PROGDIR/noip-renew.py "$USERNAME" "$PASSWORD" "$NOTIFY" 2
 else
     cd $LOGDIR
-    $PROGDIR/noip-renew.py "$USERNAME" "$PASSWORD" "$NOTIFICATION" 0 >> $USERNAME.log
+    $PROGDIR/noip-renew.py "$USERNAME" "$PASSWORD" "$NOTIFY" 0 >> $USERNAME.log
 fi

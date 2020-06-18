@@ -127,6 +127,7 @@ function notificationInstall() {
         case $opt in
             "Pushover Notifications")
                 notification="Pushover"
+                $SUDO $PYTHON -m pip install requests
                 echo "Pushover requirements installed..."
                 break
                 ;;
@@ -174,7 +175,7 @@ function pushover() {
     echo "Enter your Pushover User Key..."
     read -p 'User: ' uservar
 
-    tokenvar=`echo -n $uservar | base64`
+    uservar=`echo -n $uservar | base64`
 
     $SUDO sed -i 's/PUSHOVER_USER_KEY=".*"/PUSHOVER_USER_KEY="'$uservar'"/1' $INSTEXE
 }
