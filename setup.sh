@@ -121,10 +121,16 @@ function uninstall() {
 
 function notificationInstall() {
     PS3='Select an option: '
-    options=("Pushover Notifications" "Slack Notifications" "Telegram Notifications" "None")
+    options=("Discord Notifications" "Pushover Notifications" "Slack Notifications" "Telegram Notifications" "None")
     select opt in "${options[@]}"
     do
         case $opt in
+            "Discord Notifications")
+                notification="Discord"
+                $SUDO $PYTHON -m pip install discord-webhook
+                echo "Discord requirements installed..."
+                break
+                ;;
             "Pushover Notifications")
                 notification="Pushover"
                 $SUDO $PYTHON -m pip install requests
@@ -157,12 +163,19 @@ function notificationSetup() {
     $SUDO sed -i 's/NOTIFICATION=".*"/NOTIFICATION="'$1'"/1' $INSTEXE
 
     case $1 in
+        "Discord") discord;;
         "Pushover") pushover;;
         "Slack") slack;;
         "Telegram") telegram;;
     esac
 }
 
+function discord() {
+    echo "Enter the URL of your Discord webhook..."
+    read -p 'Webhook: ' webhook
+
+    $SUDO sed -i 's/DISCORD_WEBHOOK=".*"/DISCORD_WEBHOOK="'$webhook'"/1' $INSTEXE
+}
 
 function pushover() {
     echo "Enter your Pushover Token..."

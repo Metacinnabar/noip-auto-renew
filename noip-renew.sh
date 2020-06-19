@@ -18,6 +18,9 @@ PROGDIR=$(dirname -- $0)
 # Notification Method
 NOTIFICATION=""
 
+# Discord
+DISCORD_WEBHOOK=""
+
 # Pushover
 PUSHOVER_TOKEN=""
 PUSHOVER_USER_KEY=""
@@ -29,6 +32,7 @@ CHANNEL=""
 if [ ! -z "$NOTIFICATION" ]; then
     NPARMS=""
     case $NOTIFICATION in
+        "Discord") NPARMS="|${DISCORD_WEBHOOK}"
         "Pushover") NPARMS="|${PUSHOVER_TOKEN}|${PUSHOVER_USER_KEY}";;
         "Slack") NPARMS="|${SLACK_TOKEN}|${CHANNEL}";;
         "Telegram") NPARMS="";;

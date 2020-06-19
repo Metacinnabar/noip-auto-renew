@@ -5,7 +5,7 @@ This script auto clicks web pages to renew the hosts,
 using Python/Selenium with Chrome headless mode.
 
 - Platform: Debian/Ubuntu/Raspbian Linux, no GUI needed (tested on Debian 9.x/10.x); python 3.6+
-- Ver: 1.2
+- Ver: 1.3
 - Ref: [Technical explanation for the code (Chinese)](http://www.jianshu.com/p/3c8196175147)
 - Updated: 06/19/2020
 - Created: 11/04/2017
@@ -41,6 +41,17 @@ You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip
 
 
 ## Notification Setup
+
+### Discord:
+
+1. Sign up on the [Discord website](https://discord.com/login).
+2. After creating an account, create a server.
+![2020-06-19_16-30-40](https://user-images.githubusercontent.com/23632287/85154342-3c2d8c80-b24f-11ea-9404-05a24b500dc2.png)
+3. Once this is done, right click on server > server settings > webhooks
+![2020-06-19_16-29-47](https://user-images.githubusercontent.com/23632287/85154382-48b1e500-b24f-11ea-9e9b-e7a30c513a15.png)
+4. Create a new webhook with a name of choice. Mine is "No-IP Host Monitor" and assign it to a channel.
+![2020-06-19_16-31-36](https://user-images.githubusercontent.com/23632287/85154439-5bc4b500-b24f-11ea-88bc-75c9ce4b88c4.png)
+5. Copy the Webhook URL and enter this during setup. 
 
 ### Pushover:
 
@@ -87,7 +98,8 @@ You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip
 ![2020-06-19_13-42-25](https://user-images.githubusercontent.com/23632287/85134940-257a3c00-b235-11ea-804b-1e50f4724736.png)
 
 ## History
-- 1.2 (06/19/2020): Added Notification support for Pushover, Slack & Telegram. 
+- 1.3 (06/19/2020): Final commit from @IDemixI. Added Discord Support.
+- 1.2 (06/18/2020): Added Notification support for Pushover, Slack & Telegram. 
 - 1.1 (06/05/2020): Fixed error when attempting to update an expired host.
 - 1.0 (05/18/2020): Minor fixes to an xpath & a try catch pass to avoid an exception. Also fixed versioning.
 - 1.0 (04/16/2020): Catches "Would you like to upgrade?" page & stops script accordingly. Manual intervention still required.

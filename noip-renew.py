@@ -25,6 +25,11 @@ import base64
 import subprocess
 
 try:
+    from discord_webhook import DiscordWebhook, DiscordEmbed
+except ImportError:
+    pass
+
+try:
     import requests
 except ImportError:
     pass
@@ -59,13 +64,17 @@ class Notify:
     USER_KEY = ""
     SLACK_TOKEN = ""
     CHANNEL = ""
+    WEBHOOK_URL = ""
 
     def __init__(self, notification_type):
         self.notification_type = notification_type
         self.setup(self.notification_type)
 
     def setup(self, notification_type):
-        return { "Pushover": self.setupPushover, "Slack": self.setupSlack }.get(self.notification_type.split('|')[0], lambda : 'Invalid')()
+        return { "Discord": self.setupDiscord, "Pushover": self.setupPushover, "Slack": self.setupSlack }.get(self.notification_type.split('|')[0], lambda : 'Invalid')()
+
+    def setupDiscord(self):
+        self.WEBHOOK_URL = self.notification_type.split('|')[1]
 
     def setupPushover(self):
         self.APP_TOKEN = base64.b64decode(self.notification_type.split('|')[1]).decode('utf-8')
@@ -85,6 +94,11 @@ class Notify:
           "attachment": ("image.png", open(img, "rb"), "image/png")
         })
         del r
+
+    def discord(self, msg, img):
+        webhook = DiscordWebhook(url=self.WEBHOOK_URL, content=msg)
+        with open(img, "rb") as f:
+            webhook.add_file(file=f.read(), filename=img)
 
     def slack(self, msg, img):
         client = WebClient(token=self.SLACK_TOKEN)
@@ -106,7 +120,9 @@ class Notify:
             telegram_send.send(captions=[msg], images=[f])
 
     def send(self, message, image):
-        if self.notification_type.split('|')[0] == "Pushover":
+        if self.notification_type.split('|')[0] == "Discord":
+            self.discord(message, image)
+        elif self.notification_type.split('|')[0] == "Pushover":
             self.pushover(message, image)
         elif self.notification_type.split('|')[0] == "Slack":
             self.slack(message, image)
