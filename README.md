@@ -158,7 +158,7 @@ You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip
 - 1.2 (06/18/2020): Added Notification support for Pushover, Slack & Telegram. 
 - 1.1 (06/05/2020): Fixed error when attempting to update an expired host.
 - 1.0 (05/18/2020): Minor fixes to an xpath & a try catch pass to avoid an exception. Also fixed versioning.
-- 1.0 (04/16/2020): Catches "Would you like to upgrade?" page & stops script accordingly. Manual intervention still required.
+- 1.0 (04/16/2020): Catches "Would you like to upgrade?" & stops script correctly. Manual intervention still required.
 - 0.9 (04/13/2020): Complete refactor of code, more stability & automatic crontab scheduling.
 - 0.8 (03/23/2020): Added menu to repair/install/remove script along with ability to update noip.com details.
 - 0.7 (03/21/2020): Code tidyup and improved efficiency (Removed number of hosts and automatically get this)
@@ -174,4 +174,4 @@ You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip
 - [ ] Improve logging process to allow user to modify log level efficiently 
 - [ ] Further tidy the script and improve installation & uninstallation process. Make this more streamline.
 - [ ] Change the way the script sets "noip-renew-<strong>user</strong>" to call it. Make it noip-renew --noipaccountname
-- [ ] Set up additional callable parameters and config (`--configure --help --version --uninstall --repair --upgrade `)
+- [ ] Set up additional callable parameters (`--configure --help --version --uninstall --repair --upgrade --logs`)
