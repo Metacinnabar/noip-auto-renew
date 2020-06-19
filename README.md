@@ -7,7 +7,7 @@ using Python/Selenium with Chrome headless mode.
 - Platform: Debian/Ubuntu/Raspbian Linux, no GUI needed (tested on Debian 9.x/10.x); python 3.6+
 - Ver: 1.2
 - Ref: [Technical explanation for the code (Chinese)](http://www.jianshu.com/p/3c8196175147)
-- Updated: 06/11/2020
+- Updated: 06/19/2020
 - Created: 11/04/2017
 - Author: loblab
 - Contributor: [IDemixI](https://www.github.com/IDemixI)
@@ -71,12 +71,23 @@ You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip
 ![2020-06-18_22-44-39](https://user-images.githubusercontent.com/23632287/85078811-2ff8ef00-b1bd-11ea-9543-cf616bfc56b2.png)
 8. Install the script, entering your Access Token and Channel when prompted.
 
-
 ### Telegram:
 
+1. Create a Telegram account by downloading the App to your device https://telegram.org/. 
+   - Please note, for Telegram you need to use your mobile number.
+2. After you have an account set up, I recommend setting the bot up using a [browser](https://web.telegram.org/) on a device you can copy and paste from.
+3. Navigate to https://telegram.me/BotFather and set up a new bot. I did this using `/start` followed by `/newbot`
+![2020-06-19_13-41-26](https://user-images.githubusercontent.com/23632287/85134354-3fffe580-b234-11ea-98f9-e64306c9c264.png)
+4. Follow the steps through, naming your bot. Finding a free username was tricky.
+5. You will now be given an access token. This will be needed for setup so make a note of this. 
+![2020-06-19_13-41-03](https://user-images.githubusercontent.com/23632287/85134895-1abfa700-b235-11ea-8fab-66ef43a1bb86.png)
+6. Click the link to your bot in order to open a chat window with it. Keep this window open for now.
+7. Run setup.sh and select Telegram. When prompted to enter an access token, enter the token you received earlier.
+8. You should now be given a 5 digit code which you must send via Telegram to your bot. Setup of Telegram is now complete.
+![2020-06-19_13-42-25](https://user-images.githubusercontent.com/23632287/85134940-257a3c00-b235-11ea-804b-1e50f4724736.png)
 
 ## History
-- 1.2 (06/11/2020): Added Notification support for Pushover, Slack & Telegram. 
+- 1.2 (06/19/2020): Added Notification support for Pushover, Slack & Telegram. 
 - 1.1 (06/05/2020): Fixed error when attempting to update an expired host.
 - 1.0 (05/18/2020): Minor fixes to an xpath & a try catch pass to avoid an exception. Also fixed versioning.
 - 1.0 (04/16/2020): Catches "Would you like to upgrade?" page & stops script accordingly. Manual intervention still required.

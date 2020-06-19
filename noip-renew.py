@@ -102,7 +102,8 @@ class Notify:
             assert e.response["error"]
 
     def telegram(self, msg, img):
-        print("SEND TELEGRAM MESSAGE HERE")
+        with open(img, "rb") as f:
+            telegram_send.send(captions=[msg], images=[f])
 
     def send(self, message, image):
         if self.notification_type.split('|')[0] == "Pushover":
