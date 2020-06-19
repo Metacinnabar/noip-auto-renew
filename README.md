@@ -174,4 +174,4 @@ You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip
 - [ ] Improve logging process to allow user to modify log level efficiently 
 - [ ] Further tidy the script and improve installation & uninstallation process. Make this more streamline.
 - [ ] Change the way the script sets "noip-renew-<strong>user</strong>" to call it. Make it noip-renew --noipaccountname
-- [ ] Set up additional callable parameters (`--configure --help --version --uninstall --repair --upgrade --logs`)
+- [ ] Set up command parameters (`--configure --help --version --uninstall --repair --upgrade --logs`)
