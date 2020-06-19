@@ -168,3 +168,10 @@ You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip
 - 0.3 (05/19/2018): Support Docker, ignore timeout, support proxy, tested on python3.
 - 0.2 (11/12/2017): Deploy the script as normal user only. root user with 'no-sandbox' option is not safe for Chrome.
 - 0.1 (11/05/2017): Support Debian with Chrome headless.
+
+## Future Improvements
+
+- [ ] Improve logging process to allow user to modify log level efficiently 
+- [ ] Further tidy the script and improve installation & uninstallation process. Make this more streamline.
+- [ ] Change the way the script sets "noip-renew-<strong>user</strong>" to call it. Make it noip-renew --noipaccountname
+- [ ] Set up additional callable parameters and config (`--configure --help --version --uninstall --repair --upgrade `)
