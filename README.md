@@ -14,6 +14,7 @@ using Python/Selenium with Chrome headless mode.
 
 ![noip.com hosts](https://raw.githubusercontent.com/loblab/noip-renew/master/screenshot.png)
 
+
 ## Usage
 
 1. Clone this repository to the device you will be running it from. (`git clone https://github.com/loblab/noip-renew.git`)
@@ -31,6 +32,7 @@ grep -h Confirmed *.log | grep -v ": 0" | sort
 ```
 
 To check script version, use command: ``noip-renew-username --version``
+
 
 ## Remarks
 
@@ -97,8 +99,9 @@ You can also check [DNS-O-Matic](https://dnsomatic.com/) to update multiple noip
 8. You should now be given a 5 digit code which you must send via Telegram to your bot. Setup of Telegram is now complete.
 ![2020-06-19_13-42-25](https://user-images.githubusercontent.com/23632287/85134940-257a3c00-b235-11ea-804b-1e50f4724736.png)
 
+
 ## History
-- 1.3 (06/19/2020): Final commit from @IDemixI. Added Discord Support.
+- 1.3 (06/19/2020): Final commit from [IDemixI](https://www.github.com/IDemixI) Added Discord Support.
 - 1.2 (06/18/2020): Added Notification support for Pushover, Slack & Telegram. 
 - 1.1 (06/05/2020): Fixed error when attempting to update an expired host.
 - 1.0 (05/18/2020): Minor fixes to an xpath & a try catch pass to avoid an exception. Also fixed versioning.
