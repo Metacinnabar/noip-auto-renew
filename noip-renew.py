@@ -99,7 +99,7 @@ class Notify:
         webhook = DiscordWebhook(url=self.WEBHOOK_URL, content=msg)
         with open(img, "rb") as f:
             webhook.add_file(file=f.read(), filename=img)
-        self.logger.log(webhook.execute())
+        webhook.execute() #i should log the output of this
 
     def slack(self, msg, img):
         client = WebClient(token=self.SLACK_TOKEN)
