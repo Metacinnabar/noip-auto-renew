@@ -5,7 +5,7 @@ VERSION="1.2"
 
 if [ "$1" = "--version" ] ; then
     echo Version $VERSION
-    return 0
+    exit 0
 fi
 
 # No-IP Account
