@@ -32,7 +32,7 @@ CHANNEL=""
 if [ ! -z "$NOTIFICATION" ]; then
     NPARMS=""
     case $NOTIFICATION in
-        "Discord") NPARMS="|${DISCORD_WEBHOOK}"
+        "Discord") NPARMS="|${DISCORD_WEBHOOK}";;
         "Pushover") NPARMS="|${PUSHOVER_TOKEN}|${PUSHOVER_USER_KEY}";;
         "Slack") NPARMS="|${SLACK_TOKEN}|${CHANNEL}";;
         "Telegram") NPARMS="";;
