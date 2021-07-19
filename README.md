@@ -17,9 +17,9 @@ using Python/Selenium with Chrome headless mode.
 
 ## Usage
 
-1. Clone this repository to the device you will be running it from. (`git clone https://github.com/loblab/noip-renew.git`)
+1. Clone this repository to the device you will be running it from. (`git clone https://github.com/GoodPro712/noip-auto-renew`)
 2. Run setup.sh and set your noip.com account information.
-3. Run `noip-renew-username`, check results.png (if succeeded) or exception.png (if failed)
+3. Run `noip-renew`, check results.png (if succeeded) or exception.png (if failed)
 
 For information on how to set up Notifications, please read the Notifications section.
 
@@ -31,7 +31,7 @@ Check confirmed records from multiple log files:
 grep -h Confirmed *.log | grep -v ": 0" | sort
 ```
 
-To check script version, use command: ``noip-renew-username --version``
+To check script version, use command: ``noip-renew --version``
 
 
 ## Remarks
