@@ -69,7 +69,6 @@ class Notify:
     def __init__(self, notification_type):
         self.notification_type = notification_type
         self.setup(self.notification_type)
-        self.logger = Logger(2)
 
     def setup(self, notification_type):
         return { "Discord": self.setupDiscord, "Pushover": self.setupPushover, "Slack": self.setupSlack }.get(self.notification_type.split('|')[0], lambda : 'Invalid')()
@@ -97,12 +96,10 @@ class Notify:
         del r
 
     def discord(self, msg, img):
-        #raise Exception(self.WEBHOOK_URL)
-        self.logger.log(self.notification_type)
-        #webhook = DiscordWebhook(url=self.WEBHOOK_URL, content=msg)
-        #with open(img, "rb") as f:
-        #    webhook.add_file(file=f.read(), filename=img)
-        #print(webhook.execute())
+        webhook = DiscordWebhook(url=self.WEBHOOK_URL, content=msg)
+        with open(img, "rb") as f:
+            webhook.add_file(file=f.read(), filename=img)
+        print(webhook.execute())
 
     def slack(self, msg, img):
         client = WebClient(token=self.SLACK_TOKEN)
