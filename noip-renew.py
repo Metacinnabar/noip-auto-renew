@@ -69,12 +69,13 @@ class Notify:
     def __init__(self, notification_type):
         self.notification_type = notification_type
         self.setup(self.notification_type)
+        self.logger = Logger(2)
 
     def setup(self, notification_type):
         return { "Discord": self.setupDiscord, "Pushover": self.setupPushover, "Slack": self.setupSlack }.get(self.notification_type.split('|')[0], lambda : 'Invalid')()
 
     def setupDiscord(self):
-        self.WEBHOOK_URL = self.notification_type.split('|')[1]
+        self.WEBHOOK_URL = self.notification_type.split('|', 2)[1]
 
     def setupPushover(self):
         self.APP_TOKEN = base64.b64decode(self.notification_type.split('|')[1]).decode('utf-8')
@@ -96,10 +97,12 @@ class Notify:
         del r
 
     def discord(self, msg, img):
-        webhook = DiscordWebhook(url=self.WEBHOOK_URL, content=msg)
-        with open(img, "rb") as f:
-            webhook.add_file(file=f.read(), filename=img)
-        webhook.execute() #i should log the output of this
+        #raise Exception(self.WEBHOOK_URL)
+        self.logger.log(self.notification_type)
+        #webhook = DiscordWebhook(url=self.WEBHOOK_URL, content=msg)
+        #with open(img, "rb") as f:
+        #    webhook.add_file(file=f.read(), filename=img)
+        #print(webhook.execute())
 
     def slack(self, msg, img):
         client = WebClient(token=self.SLACK_TOKEN)
@@ -282,7 +285,7 @@ class Robot:
 
 
 def main(argv=None):
-    noip_username, noip_password, notification_type, debug,  = get_args_values(argv)
+    noip_username, noip_password, notification_type, debug = get_args_values(argv)
     return (Robot(noip_username, noip_password, notification_type, debug)).run()
 
 

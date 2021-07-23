@@ -171,10 +171,9 @@ function notificationSetup() {
 }
 
 function discord() {
-    echo "Enter the URL of your Discord webhook..."
-    read -p 'Webhook: ' webhook
-
-    $SUDO sed -i 's/DISCORD_WEBHOOK=".*"/DISCORD_WEBHOOK="'$webhook'"/1' $INSTEXE
+    read -p 'Discord Webhook URL: ' webhook
+    # modulo character here because webhook url messes with sed
+    $SUDO sed -i 's%DISCORD_WEBHOOK=".*"%DISCORD_WEBHOOK="'$webhook'"%1' $INSTEXE
 }
 
 function pushover() {
