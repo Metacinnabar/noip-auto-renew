@@ -27,7 +27,7 @@ function config() {
 
 function install() {
     echo "Installing necessary packages..."
-    read -p 'Perform apt-get update? (y/n): ' update
+    read -r -p 'Perform apt-get update? (y/n): ' update
     if [ "${update^^}" = "Y" ]
     then
       $SUDO apt-get update
@@ -50,7 +50,7 @@ function install() {
     $SUDO apt -y install chromium-browser # Update Chromium Browser or script won't work.
     $SUDO apt -y install $PYTHON-pip
     $SUDO $PYTHON -m pip install selenium
-    read -p 'Set up Notifications? (y/n): ' notify
+    read -r -p 'Set up Notifications? (y/n): ' notify
     if [ "${notify^^}" = "Y" ]
     then
       notificationInstall
@@ -90,8 +90,8 @@ function deploy() {
 
 function noip() {
     echo "Enter your No-IP Account details..."
-    read -p 'Username: ' uservar
-    read -sp 'Password: ' passvar
+    read -r -p 'Username: ' uservar
+    read -r -sp 'Password: ' passvar
 
     passvar=`echo -n $passvar | base64`
     echo
@@ -111,7 +111,7 @@ function installer() {
 function uninstall() {
     $SUDO sed -i '/noip-renew/d' /etc/crontab
     $SUDO rm $INSTDIR/*noip-renew*
-    read -p 'Do you want to remove all log files? (y/n): ' clearLogs
+    read -r -p 'Do you want to remove all log files? (y/n): ' clearLogs
     if [ "${clearLogs^^}" = "Y" ]
     then
       $SUDO rm -rf $LOGDIR
@@ -171,21 +171,21 @@ function notificationSetup() {
 }
 
 function discord() {
-    read -p 'Discord Webhook URL: ' webhook
+    read -r -p 'Discord Webhook URL: ' webhook
     # modulo character here because webhook url messes with sed
     $SUDO sed -i 's%DISCORD_WEBHOOK=".*"%DISCORD_WEBHOOK="'$webhook'"%1' $INSTEXE
 }
 
 function pushover() {
     echo "Enter your Pushover Token..."
-    read -p 'Token: ' tokenvar
+    read -r -p 'Token: ' tokenvar
 
     tokenvar=`echo -n $tokenvar | base64`
 
     $SUDO sed -i 's/PUSHOVER_TOKEN=".*"/PUSHOVER_TOKEN="'$tokenvar'"/1' $INSTEXE
 
     echo "Enter your Pushover User Key..."
-    read -p 'User: ' uservar
+    read -r -p 'User: ' uservar
 
     uservar=`echo -n $uservar | base64`
 
@@ -195,14 +195,14 @@ function pushover() {
 
 function slack() {
     echo "Enter your Slack Bot User OAuth Access Token..."
-    read -p 'Token: ' tokenvar
+    read -r -p 'Token: ' tokenvar
 
     tokenvar=`echo -n $tokenvar | base64`
 
     $SUDO sed -i 's/SLACK_TOKEN=".*"/SLACK_TOKEN="'$tokenvar'"/1' $INSTEXE
 
     echo "Enter the channel you wish to receive notifications on..."
-    read -p 'Channel: ' channel
+    read -r -p 'Channel: ' channel
 
     $SUDO sed -i 's/CHANNEL=".*"/CHANNEL="'$channel'"/1' $INSTEXE
 }
