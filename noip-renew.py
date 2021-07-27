@@ -100,7 +100,7 @@ class Notify:
         with open(img, "rb") as f:
             webhook.add_file(file=f.read(), filename=img)
         response = webhook.execute()
-        print("Webhook response: " + response)
+        print("Webhook response: " + str(response))
 
     def slack(self, msg, img):
         client = WebClient(token=self.SLACK_TOKEN)
