@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# schedules noip renew to run once a host is able to be renewed
 USER=
 SUDO=sudo
 LOGDIR=/var/log/noip-renew/$USER
