@@ -1,23 +1,11 @@
-# Script to auto renew/confirm noip.com free hosts
+# Overview
+Noip-auto-renew is a simple program to renew free [noip](https://www.noip.com/) hosts before they expire. Schedules a cronjob to renew the host automatically.
 
-[noip.com](https://www.noip.com/) free hosts expire every month.
-This script auto clicks web pages to renew the hosts,
-using Python/Selenium with Chrome headless mode.
-
-- Platform: Debian/Ubuntu/Raspbian Linux, no GUI needed (tested on Debian 9.x/10.x); python 3.6+
-- Ver: 1.3
-- Ref: [Technical explanation for the code (Chinese)](http://www.jianshu.com/p/3c8196175147)
-- Updated: 06/19/2020
-- Created: 11/04/2017
-- Author: loblab
-- Contributor: [IDemixI](https://www.github.com/IDemixI)
-
-![noip.com hosts](https://raw.githubusercontent.com/loblab/noip-renew/master/screenshot.png)
-
+Built with Python/Selenium with headless Chromium.
 
 ## Usage
 
-1. Clone this repository to the device you will be running it from. (`git clone https://github.com/GoodPro712/noip-auto-renew`)
+1. Clone this tepository  (`git clone https://github.com/GoodPro712/noip-auto-renew`)
 2. Run setup.sh and set your noip.com account information.
 3. Run `noip-renew`, check results.png (if succeeded) or exception.png (if failed)
 
