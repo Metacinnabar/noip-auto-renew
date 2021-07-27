@@ -225,11 +225,8 @@ class Robot:
         host_button.click()
         time.sleep(3)
         intervention = False
-        try:
-            if self.browser.find_elements_by_xpath("//h2[@class='big']")[0].text == "Upgrade Now":
+        if self.browser.find_elements_by_xpath("//h2[@class='big']")[0].text == "Upgrade Now":
                 intervention = True
-        except:
-            pass
 
         if intervention:
             raise Exception("Manual intervention required. Upgrade text detected.")
