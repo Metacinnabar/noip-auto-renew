@@ -1,9 +1,9 @@
 # Overview
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/goodpro712/noip-auto-renew/notifications)
-![GitHub repo size](https://img.shields.io/github/repo-size/goodpro712/noip-auto-renew)
-![GitHub](https://img.shields.io/github/license/goodpro712/noip-auto-renew)
-![GitHub last commit](https://img.shields.io/github/last-commit/goodpro712/noip-auto-renew)
-![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/goodpro712/noip-auto-renew?include_prereleases&sort=semver)
+[![CodeFactor](https://www.codefactor.io/repository/github/metacinnabar/noip-auto-renew/badge)](https://www.codefactor.io/repository/github/metacinnabar/noip-auto-renew)
+![GitHub repo size](https://img.shields.io/github/repo-size/Metacinnabar/noip-auto-renew)
+![GitHub](https://img.shields.io/github/license/Metacinnabar/noip-auto-renew)
+![GitHub last commit](https://img.shields.io/github/last-commit/Metacinnabar/noip-auto-renew)
+![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/Metacinnabar/noip-auto-renew?include_prereleases&sort=semver)
 
 Noip-auto-renew is a simple program to renew free [noip](https://www.noip.com/) hosts before they expire. Schedules a cronjob to renew the host automatically.
 
@@ -13,7 +13,7 @@ Built with Python/Selenium with headless Chromium.
 Quick note: `username` is used in replacement of the system user you are running this program from.
 
 #### Getting started 
-1. Clone the repository  (`git clone https://github.com/GoodPro712/noip-auto-renew`)
+1. Clone the repository  (`git clone https://github.com/Metacinnabar/noip-auto-renew`)
 2. Enter the `noip-auto-renew` directory (`cd noip-auto-renew`)
 2. Run `setup.sh` and set your noip.com account information. (`./setup.sh`)
 3. Run `noip-renew-username`, check results.png (if succeeded) or exception.png (if failed)
